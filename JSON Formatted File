@@ -1,0 +1,19 @@
+import json
+
+filename = 'amazon.txt'
+commands ={}
+dictt ={}
+
+with open(filename,encoding='utf-8') as f:
+	for line in f:
+		command = line.strip().split(":")[0]
+		description= line.strip().split(":")[-1]
+		if(command == "Id" or command == "ASIN" or command == "similar"):
+			commands[command] = description
+			#dictt.setdefault(command,[]).append(description)	-- to get all ids, ASIN and similar together
+		if(command == "similar"):
+			with open('file.txt', 'a+') as f:
+				f.write(json.dumps(commands, indent = 2) + ',')
+
+
+f.close()
